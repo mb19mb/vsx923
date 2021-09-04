@@ -43,6 +43,10 @@ class VSX:
         self.__log("Ausschalten")
         subprocess.call([self.path + "ausschalten.sh", str(vnew)])
         
+    def einschalten(self):
+        self.__log("Einschalten")
+        subprocess.call([self.path + "einschalten.sh", str(vnew)])
+        
     def lauter(self):
         self.__log("Lauter")
         # ermittelte Lautstaerke einlesen
