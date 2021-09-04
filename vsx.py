@@ -61,7 +61,7 @@ class VSX:
 
     def __vCurrentIsNumeric(self):
         # Konnte Lautstaerke nicht ermittelt werden, setzen wir Volume auf 92
-        if unicode(self.vCurrent).isnumeric() == False:
+        if self.vCurrent.isnumeric() == False:
             self.__log("vCurrent is not numceric. Adapt vCurrent...")
             self.vCurrent = "92"
 
