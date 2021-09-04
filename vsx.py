@@ -41,11 +41,11 @@ class VSX:
 
     def ausschalten(self):
         self.__log("Ausschalten")
-        subprocess.call([self.path + "ausschalten.sh", str(vnew)])
+        subprocess.call([self.path + "ausschalten.sh"])
         
     def einschalten(self):
         self.__log("Einschalten")
-        subprocess.call([self.path + "einschalten.sh", str(vnew)])
+        subprocess.call([self.path + "einschalten.sh"])
         
     def lauter(self):
         self.__log("Lauter")
