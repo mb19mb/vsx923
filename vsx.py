@@ -40,7 +40,7 @@ class VSX:
 
     def volume(self, percent):
         self.__log("volume")
-        self.__log(percent)
+        self.__log(str(percent))
 
     def ausschalten(self):
         self.__log("Ausschalten")
