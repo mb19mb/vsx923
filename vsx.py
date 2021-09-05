@@ -43,7 +43,7 @@ class VSX:
         self.__log(str(percent))
         vnew = int(round(self.vMax/100*percent))
         # MAXWert ueberschritten? Beende
-        if int(vnew) >= int(self.vMax):
+        if int(vnew) > int(self.vMax):
             self.__log("zulaut... mache nix")
             sys.exit()
         
@@ -69,7 +69,7 @@ class VSX:
         vnew = self.vCurrent + self.vUpStepSize
 
         # MAXWert ueberschritten? Beende
-        if int(vnew) >= int(self.vMax):
+        if int(vnew) > int(self.vMax):
             self.__log("zulaut... mache nix")
             sys.exit()
 
@@ -90,7 +90,7 @@ class VSX:
         self.__readCurrentVolume()
 
         # Ist Maximalwert bereits ueberschritten? Exit
-        if self.vCurrent >= self.vMax:
+        if self.vCurrent > self.vMax:
             self.__log("Maximale Lautstaerke erreicht")
             sys.exit()
 
