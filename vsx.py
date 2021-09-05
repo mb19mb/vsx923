@@ -41,7 +41,7 @@ class VSX:
     def volume(self, percent):
         self.__log("volume")
         self.__log(str(percent))
-        vnew = self.vMax/100*percent
+        vnew = int(round(self.vMax/100*percent))
         # MAXWert ueberschritten? Beende
         if int(vnew) >= int(self.vMax):
             self.__log("zulaut... mache nix")
