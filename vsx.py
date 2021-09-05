@@ -38,6 +38,9 @@ class VSX:
         self.__vCurrentIsNumeric()
         self.__log("aktuelle Lautstaerke: " + str(self.vCurrent))
 
+    def volume(self, percent):
+        self.__log("volume")
+        self.__log(percent)
 
     def ausschalten(self):
         self.__log("Ausschalten")
