@@ -7,8 +7,8 @@ class VSX:
     path = "/home/pi/habridge/skripte/"
     logEnabled = True
     volumeTmpFile = ""
-    vMax = "131"
-    vCurrent = "92"
+    vMax = 131
+    vCurrent = 92
     vUpStepSize = 15
 
     def __init__(self):
@@ -32,38 +32,57 @@ class VSX:
         f = open(self.volumeTmpFile, "r")
         for line in f:
             if line.startswith("VOL"):
-                self.vCurrent = line.lstrip("VOL").strip()
+                self.vCurrent = int(line.lstrip("VOL").strip())
                 break
 
         self.__vCurrentIsNumeric()
-        self.__log("aktuelle Lautstaerke: " + self.vCurrent)
+        self.__log("aktuelle Lautstaerke: " + str(self.vCurrent))
 
+    def volume(self, percent):
+        self.__log("volume")
+        self.__log(str(percent))
+        vnew = int(round(self.vMax/100*percent))
+        # MAXWert ueberschritten? Beende
+        if int(vnew) > int(self.vMax):
+            self.__log("zulaut... mache nix")
+            sys.exit()
+        
+        vnew = (str(vnew) + "VL").rjust(5, "0")
+        self.__log("neuer Lautstaerkewerte: " + vnew + "\n")
+        subprocess.call([self.path + "vsxExeCmd.sh", str(vnew)])
+        
 
+    def ausschalten(self):
+        self.__log("Ausschalten")
+        subprocess.call([self.path + "ausschalten.sh"])
+        
+    def einschalten(self):
+        self.__log("Einschalten")
+        subprocess.call([self.path + "einschalten.sh"])
+        
     def lauter(self):
         self.__log("Lauter")
         # ermittelte Lautstaerke einlesen
         self.__readCurrentVolume()
 
         # Neue Lautstaerke setzen
-        vnew = int(self.vCurrent) + self.vUpStepSize
+        vnew = self.vCurrent + self.vUpStepSize
 
         # MAXWert ueberschritten? Beende
-        if int(vnew) >= int(self.vMax):
+        if int(vnew) > int(self.vMax):
             self.__log("zulaut... mache nix")
             sys.exit()
 
         vnew = (str(vnew) + "VL").rjust(5, "0")
-
         self.__log("neuer Lautstaerkewerte: " + vnew + "\n")
-
         subprocess.call([self.path + "vsxExeCmd.sh", str(vnew)])
 
 
     def __vCurrentIsNumeric(self):
         # Konnte Lautstaerke nicht ermittelt werden, setzen wir Volume auf 92
-        if unicode(self.vCurrent).isnumeric() == False:
+        if str(self.vCurrent).isnumeric() == False:
             self.__log("vCurrent is not numceric. Adapt vCurrent...")
-            self.vCurrent = "92"
+            self.vCurrent = 92
 
     def leiser(self):
         self.__log("Leiser")
@@ -71,12 +90,12 @@ class VSX:
         self.__readCurrentVolume()
 
         # Ist Maximalwert bereits ueberschritten? Exit
-        if int(self.vCurrent) >= self.vMax:
+        if self.vCurrent > self.vMax:
             self.__log("Maximale Lautstaerke erreicht")
             sys.exit()
 
         # Neue Lautstaerke setzen
-        vnew = int(self.vCurrent) - self.vUpStepSize
+        vnew = self.vCurrent - self.vUpStepSize
         vnew = (str(vnew) + "VL").rjust(5, "0")
         self.__log("neuer Lautstaerkewerte: " + vnew + "\n")
         subprocess.call([self.path + "vsxExeCmd.sh", str(vnew)])
