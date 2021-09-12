@@ -28,7 +28,7 @@ class VsxTelnet:
             if value == "":
                 done = True
 
-        self.outList.append(output)
+        self.outList.append(self.output)
         self.closeTelnet()
 
     def printLastCommandResult(self):
