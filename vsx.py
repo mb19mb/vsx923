@@ -1,6 +1,5 @@
 #!/usr/bin/python
 from datetime import datetime
-import VsxTelnet
 import sys, subprocess, imp
 
 # noinspection PyInconsistentIndentation
@@ -11,8 +10,11 @@ class VSX:
     vMax = 131
     vCurrent = 92
     vUpStepSize = 15
+    vsxTelnet = None
 
     def __init__(self):
+        v = imp.load_source("habridge.vsx", "/home/pi/habridge/skripte/VsxTelnet.py")
+        vsxTelnet = v.VsxTelnet()
         self.__log("")
         self.__readConfigParams()
 
@@ -61,9 +63,9 @@ class VSX:
         subprocess.call([self.path + "ausschalten.sh"])
         
     def einschalten(self):
-        v = VsxTelnet()
-        v.command("?P")
-        l = v.getLastCommandResult()
+
+        vsxTelnet.command("?P")
+        l = vsxTelnet.getLastCommandResult()
         self.__log(l)
 
         #self.__log("Einschalten")
