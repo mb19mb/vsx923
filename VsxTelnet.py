@@ -3,7 +3,7 @@ import getpass
 import telnetlib
 
 HOST = "192.168.20.208"
-PORT = 8192
+PORT = 8102
 
 tn = telnetlib.Telnet(None)
 tn.open(HOST, PORT)
