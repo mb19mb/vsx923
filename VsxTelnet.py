@@ -1,24 +1,13 @@
 #!/usr/bin/python
 import getpass, telnetlib, time
 
-# HOST = "192.168.20.208"
-# PORT = 8102
-#
-# tn = telnetlib.Telnet(None)
-# tn.set_debuglevel(5)
-# tn.open(HOST, PORT)
-# #out = tn.read_until("VOL".encode('ascii'), 20)
-# out = tn.read_eager()
-# tn.write("110VL".encode('ascii') + "\r\n".encode('ascii'))
-# tn.close()
-# print(out)
-
 class VsxTelnet:
-    debugLevel = 5
+    debugLevel = 0
     tn = None
     telnetHost = "192.168.20.208"
     telnetPort = 8102
     output = ""
+    outList = []
 
     def __init__(self):
         self.tn = telnetlib.Telnet(None)
@@ -26,7 +15,9 @@ class VsxTelnet:
 
     def command(self, cmd):
         self.openTelnet()
-        output = self.tn.read_eager()
+        self.outList = []
+        self.output = self.tn.read_eager()
+        self.outList.append(output)
         self.tn.write(cmd.encode('ascii') + "\r\n".encode('ascii'))
         time.sleep(0.5)
         done = False
@@ -37,10 +28,11 @@ class VsxTelnet:
             if value == "":
                 done = True
 
+        self.outList.append(output)
         self.closeTelnet()
 
     def printLastCommandResult(self):
-        print("LC: " + self.output)
+        print(self.outList)
 
     def openTelnet(self):
         self.tn.open(self.telnetHost, self.telnetPort)
