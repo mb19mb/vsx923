@@ -63,8 +63,7 @@ class VSX:
         v = VsxTelnet()
         v.command("?P")
         l = v.getLastCommandResult()
-        self.bar(l)
-        print l
+        self.__log(l)
 
         #self.__log("Einschalten")
         #subprocess.call([self.path + "einschalten.sh"])
