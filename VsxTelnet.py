@@ -1,19 +1,19 @@
 #!/usr/bin/python
 import getpass, telnetlib, time
 
-HOST = "192.168.20.208"
-PORT = 8102
+# HOST = "192.168.20.208"
+# PORT = 8102
+#
+# tn = telnetlib.Telnet(None)
+# tn.set_debuglevel(5)
+# tn.open(HOST, PORT)
+# #out = tn.read_until("VOL".encode('ascii'), 20)
+# out = tn.read_eager()
+# tn.write("110VL".encode('ascii') + "\r\n".encode('ascii'))
+# tn.close()
+# print(out)
 
-tn = telnetlib.Telnet(None)
-tn.set_debuglevel(5)
-tn.open(HOST, PORT)
-#out = tn.read_until("VOL".encode('ascii'), 20)
-out = tn.read_eager()
-tn.write("110VL".encode('ascii') + "\r\n".encode('ascii'))
-tn.close()
-print(out)
-
-class VxsTelnet:
+class VsxTelnet:
     debugLevel = 5
     tn = None
     telnetHost = "192.168.20.208"
