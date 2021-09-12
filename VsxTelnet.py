@@ -46,7 +46,7 @@ class VsxTelnet:
         self.tn.open(self.telnetHost, self.telnetPort)
 
     def closeTelnet(self):
-        self.tn.close(self.telnetHost, self.telnetHost)
+        self.tn.close()
 
 
 if __name__ == "__main__":
