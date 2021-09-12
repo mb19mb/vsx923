@@ -21,32 +21,32 @@ class VsxTelnet:
     output = ""
 
     def __init__(self):
-        tn = telnetlib.Telnet(None)
-        tn.set_debuglevel(self.debugLevel)
+        self.tn = telnetlib.Telnet(None)
+        self.tn.set_debuglevel(self.debugLevel)
 
     def command(self, cmd):
         self.openTelnet()
-        output = tn.read_eager()
-        tn.write(cmd.encode('ascii') + "\r\n".encode('ascii'))
+        output = self.tn.read_eager()
+        self.tn.write(cmd.encode('ascii') + "\r\n".encode('ascii'))
         time.sleep(0.5)
         done = False
         while not done:
             value = ""
-            value = tn.read_eager()
-            output += value
+            value = self.tn.read_eager()
+            self.output += value
             if value == "":
                 done = True
 
         self.closeTelnet()
 
     def printLastCommandResult(self):
-        print(output)
+        print(self.output)
 
     def openTelnet(self):
-        tn.open(self.telnetHost, self.telnetHost)
+        self.tn.open(self.telnetHost, self.telnetHost)
 
     def closeTelnet(self):
-        tn.close(self.telnetHost, self.telnetHost)
+        self.tn.close(self.telnetHost, self.telnetHost)
 
 
 if __name__ == "__main__":
