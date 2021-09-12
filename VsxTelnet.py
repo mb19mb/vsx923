@@ -34,7 +34,7 @@ class VsxTelnet:
         self.__closeTelnet()
 
     def getLastCommandResult(self):
-        return self.currentCmd
+        return self.outList
 
     def __printLastCommandResult(self):
         print(self.currentCmd)
