@@ -40,7 +40,7 @@ class VsxTelnet:
         self.closeTelnet()
 
     def printLastCommandResult(self):
-        print(self.output)
+        print("LC: " + self.output)
 
     def openTelnet(self):
         self.tn.open(self.telnetHost, self.telnetPort)
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     v.printLastCommandResult()
     time.sleep(5)
 
-    v.command("100VL")
+    v.command("110VL")
     v.printLastCommandResult()
     time.sleep(5)
 
