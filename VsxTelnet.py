@@ -6,6 +6,7 @@ class VsxTelnet:
     tn = None
     telnetHost = "192.168.20.208"
     telnetPort = 8102
+    currentCmd = ""
     output = ""
     outList = []
 
@@ -14,6 +15,7 @@ class VsxTelnet:
         self.tn.set_debuglevel(self.debugLevel)
 
     def command(self, cmd):
+        self.currentCmd = cmd
         self.openTelnet()
         self.outList = []
         self.output = self.tn.read_eager()
@@ -32,7 +34,9 @@ class VsxTelnet:
         self.closeTelnet()
 
     def printLastCommandResult(self):
+        print(self.currentCmd)
         print(self.outList)
+        print("\n\n")
 
     def openTelnet(self):
         self.tn.open(self.telnetHost, self.telnetPort)
