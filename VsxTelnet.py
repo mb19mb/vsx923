@@ -33,33 +33,23 @@ class VsxTelnet:
         self.outList.append(self.output)
         self.closeTelnet()
 
-    def printLastCommandResult(self):
-        print("> " + self.currentCmd)
-        print("< " + self.outList)
+    def getLastCommandResult(self):
+        return self.currentCmd
+
+    def __printLastCommandResult(self):
+        print(self.currentCmd)
+        print(self.outList)
         print("\n\n")
 
-    def openTelnet(self):
+    def __openTelnet(self):
         self.tn.open(self.telnetHost, self.telnetPort)
 
-    def closeTelnet(self):
+    def __closeTelnet(self):
         self.tn.close()
 
 
 if __name__ == "__main__":
     v = VsxTelnet()
     #v.command("?V")
-    v.command("095VL")
-    v.printLastCommandResult()
-    time.sleep(5)
-
-    v.command("?V")
-    v.printLastCommandResult()
-    time.sleep(5)
-
-    v.command("110VL")
-    v.printLastCommandResult()
-    time.sleep(5)
-
-    v.command("095VL")
-    v.printLastCommandResult()
-    time.sleep(5)
+    v.command("?P")
+    print(v.getLastCommandResult())
