@@ -7,7 +7,8 @@ PORT = 8102
 
 tn = telnetlib.Telnet(None)
 tn.open(HOST, PORT)
-out = tn.read_until("VOL".encode('ascii'), 20)
+#out = tn.read_until("VOL".encode('ascii'), 20)
+out = tn.read_all()
 tn.write("110VL".encode('ascii') + "\r\n".encode('ascii'))
-print(out)
 tn.close()
+print(out)
