@@ -15,6 +15,7 @@ class VSX:
     def __init__(self):
         v = imp.load_source("habridge.vsx", "/home/pi/habridge/skripte/VsxTelnet.py")
         vsxTelnet = v.VsxTelnet()
+        print(vsxTelnet)
         self.__log("")
         self.__readConfigParams()
 
