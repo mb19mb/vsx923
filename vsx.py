@@ -1,6 +1,6 @@
 #!/usr/bin/python
 from datetime import datetime
-import sys, subprocess, imp
+import sys, subprocess, imp, VsxTelnet
 
 # noinspection PyInconsistentIndentation
 class VSX:
@@ -50,15 +50,24 @@ class VSX:
         vnew = (str(vnew) + "VL").rjust(5, "0")
         self.__log("neuer Lautstaerkewerte: " + vnew + "\n")
         subprocess.call([self.path + "vsxExeCmd.sh", str(vnew)])
-        
+
+    def bar(self, stringList):
+        for s in stringList:
+            s.replace("\r\n","")
 
     def ausschalten(self):
         self.__log("Ausschalten")
         subprocess.call([self.path + "ausschalten.sh"])
         
     def einschalten(self):
-        self.__log("Einschalten")
-        subprocess.call([self.path + "einschalten.sh"])
+        v = VsxTelnet()
+        v.command("?P")
+        l = v.getLastCommandResult()
+        self.bar(l)
+        print l
+
+        #self.__log("Einschalten")
+        #subprocess.call([self.path + "einschalten.sh"])
         
     def lauter(self):
         self.__log("Lauter")
