@@ -43,7 +43,7 @@ class VsxTelnet:
         print(self.output)
 
     def openTelnet(self):
-        self.tn.open(self.telnetHost, self.telnetHost)
+        self.tn.open(self.telnetHost, self.telnetPort)
 
     def closeTelnet(self):
         self.tn.close(self.telnetHost, self.telnetHost)
