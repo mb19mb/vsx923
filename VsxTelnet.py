@@ -16,7 +16,7 @@ class VsxTelnet:
 
     def command(self, cmd):
         self.currentCmd = cmd
-        self.openTelnet()
+        self.__openTelnet()
         self.outList = []
         self.output = self.tn.read_eager()
         self.outList.append(self.output)
@@ -31,7 +31,7 @@ class VsxTelnet:
                 done = True
 
         self.outList.append(self.output)
-        self.closeTelnet()
+        self.__closeTelnet()
 
     def getLastCommandResult(self):
         return self.currentCmd
