@@ -51,5 +51,19 @@ class VsxTelnet:
 
 if __name__ == "__main__":
     v = VsxTelnet()
+    #v.command("?V")
+    v.command("095VL")
+    v.printLastCommandResult()
+    time.sleep(5)
+
     v.command("?V")
     v.printLastCommandResult()
+    time.sleep(5)
+
+    v.command("100VL")
+    v.printLastCommandResult()
+    time.sleep(5)
+
+    v.command("095VL")
+    v.printLastCommandResult()
+    time.sleep(5)
