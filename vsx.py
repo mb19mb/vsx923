@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from datetime import datetime
-import sys, subprocess, imp, VsxTelnet
+import VsxTelnet
+import sys, subprocess, imp
 
 # noinspection PyInconsistentIndentation
 class VSX:
